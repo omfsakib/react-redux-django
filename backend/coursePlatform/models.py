@@ -55,6 +55,9 @@ class Course(BaseModel):
     end_date = models.DateField()
     teacher = models.ForeignKey(User, on_delete=models.CASCADE, related_name='taught_courses',limit_choices_to={'role': 'teacher'})
     students = models.ManyToManyField(User, blank=True, related_name='enrolled_courses', limit_choices_to={'role': 'student'})
+    
+    def __str__(self):
+        return self.name
 
 
 class Lesson(BaseModel):

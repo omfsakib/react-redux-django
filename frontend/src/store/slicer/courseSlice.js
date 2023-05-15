@@ -23,5 +23,4 @@ const coursesSlice = createSlice({
         });
   }});
 
-export const { setCourses, setLoading, setError } = coursesSlice.actions;
 export const courseReducer = coursesSlice.reducer;

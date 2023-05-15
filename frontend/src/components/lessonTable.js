@@ -9,37 +9,35 @@ import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
-import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
 import UploadOutlinedIcon from '@mui/icons-material/UploadOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
-import Modal from '@mui/material/Modal';
+import { useSelector } from 'react-redux';
+import { selectLessonsByCourseId } from '../store/filterData/lessonFilter'
 
-export default function CourseTable(props) {
-  return (
-    <Box width={'70%'} margin={'auto'}>
+export default function LessonTable(props) {
+
+ const lessons = useSelector((state) => selectLessonsByCourseId(state, props.courseId));
+
+   return (
+    <Box width={'100%'} margin={'auto'}>
       <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="caption table">
         <TableHead>
           <TableRow>
             <TableCell>No.</TableCell>
-            <TableCell align="center">Course Name</TableCell>
+            <TableCell align="center">Lesson Name</TableCell>
             <TableCell align="center">Description</TableCell>
-            <TableCell align="center">Starting Date</TableCell>
-            <TableCell align="center">Ending Date</TableCell>
             <TableCell align="center">Action</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {props.courses.map((course, index) => (
-            <TableRow key={course.id}>
+          {lessons.map((lesson, index) => (
+            <TableRow key={lesson.id}>
               <TableCell>{index + 1}</TableCell>
-              <TableCell align="center">{course.name}</TableCell>
-              <TableCell align="center">{course.description}</TableCell>
-              <TableCell align="center">{course.start_date}</TableCell>
-              <TableCell align="center">{course.end_date}</TableCell>
+              <TableCell align="center">{lesson.title}</TableCell>
+              <TableCell align="center">{lesson.description}</TableCell>
               <TableCell align="center">
                 <ButtonGroup variant="outlined" aria-label="outlined button group">
-                  <Button><RemoveRedEyeOutlinedIcon/></Button>
                   <Button><UploadOutlinedIcon/></Button>
                   <Button><DeleteOutlineOutlinedIcon/></Button>
                 </ButtonGroup>
